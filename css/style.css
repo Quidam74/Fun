@@ -1,0 +1,43 @@
+.carre{
+	display: inline-block;
+	width: 3%;
+	height:3%;
+	margin: 0.5%
+
+	
+
+
+
+}
+
+.blanc{
+	background-color: white;
+}
+
+.noir{
+	background-color: black;
+}
+.rouge{
+	background-color: red;
+}
+
+.bleu{
+	background-color: blue;
+}
+
+.bleu{
+	background-color: blue;
+}
+
+#zoneDeFun{
+	width: 500px;
+	height: 500px;
+	
+}
+
+div,body{
+	line-height: 0px;
+}
+body {
+    overflow-y:hidden;
+}
