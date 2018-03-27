@@ -4,9 +4,17 @@
 $('#zoneDeFun').css("height",window.innerHeight).css("width",window.innerHeight)
 
 $.post("/getMap",function(data){
-fullMap(data)
+	fullMap(data)
 },"json");
 
+
+setInterval(function(){ 
+	
+	$.post("/getMap",function(data){
+		fullMap(data)
+	},"json");
+
+}, 200);
 
 
 
@@ -44,12 +52,13 @@ function fullMap(data){
 			var couleur
 			if(data[j][k]==0)
 				couleur ="blanc"
-			if(data[j][k]==-1)
+			if(data[j][k]==-1||data[j][k]==10)
 				couleur="noir"
 			if(data[j][k]==1)
 				couleur="rouge"
-				if(data[j][k]==2)
+			if(data[j][k]==2)
 				couleur="bleu"
+
 
 			var elem = "<div class=\"carre "+couleur+"\"></div>"
 			$('#zoneDeFun').prepend(elem)
@@ -63,10 +72,10 @@ function move(keyCode){
 
 
 
-$.post("/move/"+keyCode+"/"+document.location.href[document.location.href.length-1],function(data){
-	console.log(document.location.href[document.location.href.length-1])
-fullMap(data)
-},"json");
+	$.post("/move/"+keyCode+"/"+document.location.href[document.location.href.length-1],function(data){
+		console.log(document.location.href[document.location.href.length-1])
+		fullMap(data)
+	},"json");
 
 }
 

@@ -49,16 +49,31 @@ for (var j = map.length - 1; j >= 0; j--) {
 }
 
 
-console.log(map)
+
+
+setInterval(function(){ 
+	map[10][10]=10;
+
+
+ }, 3000);
+
+
+
+app.post("/getMap", function(req, res) {
+	res.json(map)
+
+});
+
+
 
 var tableauID = new Array(10)
 app.get("/:id", function(req, res) {
 	var id = eval(req.params.id)
-
+var existeDeja = false;
 	for (var j = map.length - 1; j >= 0; j--) {
 		for (var k = map[j].length - 1; k >= 0; k--) {
 			if(map[j][k] == id)
-				map[j][k] = 0;
+				existeDeja = true;
 			
 		}
 	}
@@ -73,21 +88,16 @@ app.get("/:id", function(req, res) {
 });
 
 
-
-app.post("/getMap", function(req, res) {
-	res.json(map)
-
-});
-
-
-
 app.post("/move/:direction/:id", function(req, res) {
 	var direction = req.params.direction
 	var id = eval(req.params.id)
+
 	var xdeb= tableauID[id][0]
 	var ydeb= tableauID[id][1]
+
 	var x = tableauID[id][0]
 	var y = tableauID[id][1]
+
 	for (var j = map.length - 1; j >= 0; j--) {
 		for (var k = map[j].length - 1; k >= 0; k--) {
 			if(map[j][k]==id)
@@ -100,7 +110,7 @@ app.post("/move/:direction/:id", function(req, res) {
 			}
 		}
 	}
-	console.log(direction)
+	
 	
 
 	switch (direction)
@@ -132,7 +142,7 @@ app.post("/move/:direction/:id", function(req, res) {
 
 	}
 	
-	console.log(map)
+	
 	res.json(map)
 
 });
