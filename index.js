@@ -55,7 +55,7 @@ setInterval(function(){
 	map[10][10]=10;
 
 
- }, 3000);
+}, 3000);
 
 
 
@@ -69,7 +69,7 @@ app.post("/getMap", function(req, res) {
 var tableauID = new Array(10)
 app.get("/:id", function(req, res) {
 	var id = eval(req.params.id)
-var existeDeja = false;
+	var existeDeja = false;
 	for (var j = map.length - 1; j >= 0; j--) {
 		for (var k = map[j].length - 1; k >= 0; k--) {
 			if(map[j][k] == id)
@@ -77,12 +77,13 @@ var existeDeja = false;
 			
 		}
 	}
-
-	var pos = new Array(2)
-	pos[0]=5
-	pos[1]=5
-	tableauID[id] = pos
-	map[tableauID[id][0]][tableauID[id][0]] = id
+	if(!existeDeja){
+		var pos = new Array(2)
+		pos[0]=5
+		pos[1]=5
+		tableauID[id] = pos
+		map[tableauID[id][0]][tableauID[id][0]] = id
+	}
 	res.sendFile(__dirname + "/html/map.html");
 
 });
@@ -92,11 +93,11 @@ app.post("/move/:direction/:id", function(req, res) {
 	var direction = req.params.direction
 	var id = eval(req.params.id)
 
-	var xdeb= tableauID[id][0]
-	var ydeb= tableauID[id][1]
+		var xdeb= tableauID[id][0]
+		var ydeb= tableauID[id][1]
 
-	var x = tableauID[id][0]
-	var y = tableauID[id][1]
+		var x = tableauID[id][0]
+		var y = tableauID[id][1]
 
 	for (var j = map.length - 1; j >= 0; j--) {
 		for (var k = map[j].length - 1; k >= 0; k--) {
@@ -137,8 +138,7 @@ app.post("/move/:direction/:id", function(req, res) {
 	if(map[x][y]!=-1)
 	{	
 		map[xdeb][ydeb] = 0
-		map[x][y] = id		// position[0]=x
-		// position[1]=y
+		map[x][y] = id
 
 	}
 	
